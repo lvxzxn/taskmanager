@@ -10,7 +10,7 @@
                 @auth
                     <script>window.location = "{{ route('home') }}";</script>
                 @else
-                    <h1 class="mb-4">Bem-vindo ao Nosso Site!</h1>
+                    <h1 class="mb-4">Bem-vindo ao Task Manager!</h1>
                     <p class="lead mb-4">Faça login para acessar sua conta ou registre-se para criar uma nova.</p>
                     <a href="{{ route('login') }}" class="btn btn-primary btn-lg mr-3">Entrar</a>
                     <a href="{{ route('register') }}" class="btn btn-outline-primary btn-lg">Registrar</a>
