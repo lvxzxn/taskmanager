@@ -23,16 +23,11 @@ Route::get('/', function () {
 // Rotas de autenticação
 Auth::routes();
 
-// Gerenciar Tarefas
-    // Listar Tasks
-        Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+// Editar Task
+    Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 
-    // Editar Task
-        Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-
-    // Obter detalhes de uma task
+// Obter detalhes de uma task
         Route::get('/tasks/{id}', 'TaskController@show')->name('tasks.show');
-
 
 // Rota para a página home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
