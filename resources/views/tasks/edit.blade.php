@@ -41,6 +41,24 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 row">
+                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
+                                    <option value="pendente" @if($task->status == 'pendente') selected @endif>Pendente</option>
+                                    <option value="concluída" @if($task->status == 'concluída') selected @endif>Concluída</option>
+                                    <option value="cancelada" @if($task->status == 'cancelada') selected @endif>Cancelada</option>
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
