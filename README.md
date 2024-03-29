@@ -19,11 +19,11 @@ Este projeto é uma aplicação web para gerenciar tarefas. Ele inclui funcional
 
 As seguintes rotas estão disponíveis na API:
 
-- **GET /api/tasks:** Retorna todas as tarefas cadastradas.
-- **GET /api/tasks/{id}:** Retorna os detalhes de uma tarefa específica.
-- **POST /api/tasks:** Cria uma nova tarefa.
-- **PUT /api/tasks/{id}:** Atualiza os detalhes de uma tarefa existente.
-- **DELETE /api/tasks/{id}:** Exclui uma tarefa existente.
+- **GET /api/v2/tasks:** Retorna todas as tarefas cadastradas.
+- **GET /api/v2/tasks/{id}:** Retorna os detalhes de uma tarefa específica.
+- **POST /api/v2/tasks:** Cria uma nova tarefa.
+- **PUT /api/v2/tasks/{id}:** Atualiza os detalhes de uma tarefa existente.
+- **DELETE /api/v2/tasks/{id}:** Exclui uma tarefa existente.
 
 ## Estrutura do Projeto
 
