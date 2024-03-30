@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $tasks = Task::all();
-
-        return view('tasks.index', compact('tasks'));
+        $this->middleware('auth')->except(['apiIndex', 'apiShow']);
     }
-
+    
     public function show($id)
     {
-        $task = Task::findOrFail($id);
-
+        $userId = Auth::id();
+        $task = Task::where('user_id', $userId)->findOrFail($id);
         return view('tasks.show', compact('task'));
     }
 
@@ -39,7 +38,10 @@ class TaskController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        Task::create($validator->validated());
+        $taskData = $validator->validated();
+        $taskData['user_id'] = Auth::id();
+
+        Task::create($taskData);
 
         return back()->with('success', 'Tarefa criada com sucesso.');
     }
@@ -56,7 +58,8 @@ class TaskController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $task = Task::findOrFail($id);
+        $userId = Auth::id();
+        $task = Task::where('user_id', $userId)->findOrFail($id);
         $task->update($validator->validated());
 
         return back()->with('success', 'Tarefa atualizada com sucesso.');
@@ -64,18 +67,19 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        $task = Task::find($id);
-
+        $userId = Auth::id();
+        $task = Task::where('user_id', $userId)->find($id);
+    
         if (!$task) {
             return back()->with('error', 'Tarefa não encontrada.');
         }
-
+    
         $task->delete();
-
+    
         return redirect()->route('home')->with('success', 'Tarefa excluída com sucesso.');
     }
-
-    public function apiIndex()
+    
+    public function apiIndex(Request $request)
     {
         $tasks = Task::all();
 
@@ -119,7 +123,10 @@ class TaskController extends Controller
             ], 400);
         }
 
-        $task = Task::create($validator->validated());
+        $taskData = $validator->validated();
+        $taskData['user_id'] = $request->input('user_id');
+
+        $task = Task::create($taskData);
 
         return response()->json([
             'success' => true,
@@ -143,7 +150,8 @@ class TaskController extends Controller
             ], 400);
         }
 
-        $task = Task::find($id);
+        $userId = Auth::id();
+        $task = Task::where('user_id', $userId)->find($id);
 
         if (!$task) {
             return response()->json([

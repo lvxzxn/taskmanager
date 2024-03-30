@@ -41,8 +41,7 @@ O projeto segue uma arquitetura MVC (Model-View-Controller) para separação de 
 3. Copie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente, como conexão com o banco de dados.
 4. Execute `php artisan key:generate` para gerar a chave de aplicativo.
 5. Execute `php artisan migrate` para executar as migrações do banco de dados.
-6. Execute `npm install && npm run dev` para instalar as dependências do Node.js e compilar os ativos do frontend.
-7. Execute `php artisan serve` para iniciar o servidor de desenvolvimento.
+6. Execute `php artisan serve` para iniciar o servidor de desenvolvimento.
 
 ## Créditos
 
